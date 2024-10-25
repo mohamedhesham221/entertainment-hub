@@ -44,8 +44,5 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
-  },
-  "engines": {
-    "node": "20.x"
   }
 }
