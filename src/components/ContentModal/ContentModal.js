@@ -7,13 +7,13 @@ import axios from "axios";
 import {
   img_500,
   unavailable,
-  unavailableLandscape,
+  unavailableLandscape
 } from "../../config/config";
 import "./ContentModal.css";
 import { Button } from "@material-ui/core";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import Carousel from "../Carousel/Carousel";
-
+import {ReactComponent as PlexIcon} from "../../assets/images/plexlogo.svg"
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
@@ -52,7 +52,7 @@ export default function TransitionsModal({ children, media_type, id }) {
     );
 
     setContent(data);
-    // console.log(data);
+    //console.log(data);
   };
 
   const fetchVideo = async () => {
@@ -62,7 +62,9 @@ export default function TransitionsModal({ children, media_type, id }) {
 
     setVideo(data.results[0]?.key);
   };
-
+  const openInPlex = () => {
+    window.open("https://app.plex.tv/desktop#!/search?query="+encodeURIComponent(content.title || content.name),'__blank')
+  }
   useEffect(() => {
     fetchData();
     fetchVideo();
@@ -143,6 +145,15 @@ export default function TransitionsModal({ children, media_type, id }) {
                     href={`https://www.youtube.com/watch?v=${video}`}
                   >
                     Watch the Trailer
+                  </Button>
+                  <Button
+                    variant="contained"
+                    startIcon={<PlexIcon style={{ width: 40, height: 40 }} />}
+                    color="primary"
+                    className="margin-plex-button"
+                    onClick={() => openInPlex()}
+                  >
+                    Watch the Trailer on Plex
                   </Button>
                 </div>
               </div>
